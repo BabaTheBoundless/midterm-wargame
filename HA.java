@@ -110,17 +110,15 @@ public class HA{
 
                 }
 
-            }
-            
-
+            }    
         }
         if (playerScore > cpuScore){
             System.out.println("player wins with " + playerScore + " cpu has + " + cpuScore);
-            System.out.println("total is " + totalCount);
+            System.out.println(WarLibrary.printWinner(playerScore, cpuScore, totalCount));
         }
         if (cpuScore > playerScore){
             System.out.println("cpu wins with " + cpuScore + " score player has " + playerScore);
-            System.out.println("total is " + totalCount);
+            System.out.println(WarLibrary.printWinner(cpuScore, playerScore, totalCount));
         }
 
         
