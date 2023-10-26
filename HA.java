@@ -63,21 +63,20 @@ public class HA{
         cpuDeck = WarLibrary.dealCardsToCPU(cardDeckNum);
         int playerScore = 26;
         int cpuScore = 26;
-        for (int i = 0; i < 26; i++){
+        /*for (int i = 0; i < 26; i++){
             System.out.println("player1 card " + playerDeck[i]);
             System.out.println("cpu card " + cpuDeck[i] + "\n");
             
-        }
+        }*/
         while (playerScore < 52 && cpuScore < 52 ){
             totalCount++;
-            System.out.println("NEWLOOP");
-
-            System.out.println();
             
-            /* System.out.println("player " + playerDeck[0]);
+            System.out.println("\nNEWLOOP");
+            
+            System.out.println("player " + playerDeck[0]);
             System.out.println("cpu " + cpuDeck[0]);
             System.out.println("player1 score " + playerScore);
-            System.out.println("cpu score " + cpuScore); */
+            System.out.println("cpu score " + cpuScore);
             if (playerDeck[0] > cpuDeck[0]){
                 changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore);
                 System.out.println("p1 card win");
@@ -88,15 +87,28 @@ public class HA{
             }
             if (cpuDeck[0] > playerDeck[0]){
                 changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore);
-                System.out.println("p2 card win");
+                System.out.println("CPU card win");
                 cpuScore++;
                 playerScore--;
                 continue;
             }
             else{
-                changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore);
-                System.out.println("tie");
-                continue;
+                int randInt = (int) (Math.random() * 10) + 1;
+                if (randInt > 5){
+                    changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore);
+                    System.out.println("tie P1 wins");
+                    playerScore++;
+                    cpuScore--;
+                    continue;
+                }
+                else{
+                    changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore);
+                    System.out.println("tie CPU wins");
+                    playerScore--;
+                    cpuScore++;
+                    continue;
+
+                }
 
             }
             
