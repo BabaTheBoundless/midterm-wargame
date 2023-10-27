@@ -1,5 +1,6 @@
 import java.util.Random;
-//PROBLEM IS THAT CARDS CAN BE EQUAL TO 0 FOR SOME REASON
+
+
 
 public class HA{
 
