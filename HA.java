@@ -3,21 +3,41 @@ import java.util.Random;
 
 public class HA{
 
-    public static void changeAfterRound(int[] winner, int[] loser, int winCount, int loserCount){ //adds and removes cards after round
+    public static void changeAfterRound(int[] winner, int[] loser, int winCount, int loserCount, String[] winnerString, String[] loserString){ //adds and removes cards after round
         int winnerOne = winner[0];
         int loserOne = loser[0];
+        String winnerStringOne = winnerString[0];
+        String loserStringOne = loserString[0];
         for (int i = 1; i < winner.length; i++){
             winner[i-1] = winner[i];
+            winnerString[i-1] = winnerString[i];
         }
         winner[winCount - 1] = winnerOne;
+        winnerString[winCount - 1] = winnerStringOne;
 
 
         for (int i = 1; i < loser.length; i++){
             loser[i-1] = loser[i];
+            loserString[i-1] = loserString[i];
         }
         winner[winCount] = loserOne;
+        winnerString[winCount] = loserStringOne;
 
 
+    }
+    public static String[] cardStringPlayer(String[] randomDeck){
+        String[] playerDeckString = new String[52];
+        for (int i = 0; i < 26; i++){
+            playerDeckString[i] = randomDeck[i];
+        }
+        return playerDeckString;
+    }
+    public static String[] cardStringCPU(String[] randomDeck){
+        String[] cpuDeckString = new String[52];
+        for (int i = 0; i < 26; i++){
+            cpuDeckString[i] = randomDeck[i + 26];
+        }
+        return cpuDeckString;
     }
     
     public static String[] instanceOfCard(String[] suits, String[] cardValues){  //creates card
@@ -47,13 +67,13 @@ public class HA{
     }
     
     public static void main(String[] args){
-        StdDraw.setXscale(0, 10);
+        /*StdDraw.setXscale(0, 10);
         StdDraw.setYscale(0, 10);
         StdDraw.setPenRadius(.1);
 
         StdDraw.enableDoubleBuffering();
         StdDraw.point(5, 5);
-        StdDraw.show();
+        StdDraw.show();*/
 
 
         String[] suits = { "hearts", "spades", "diamonds", "clubs" };
@@ -68,17 +88,24 @@ public class HA{
         int[] cpuDeck = new int[playDeck.length];
         int[] cardDeckNum = WarLibrary.getCardValue(playDeck);
 
+        String[] playerDeckString = cardStringPlayer(playDeck);
+        String[] cpuDeckString = cardStringCPU(playDeck);
+
         playerDeck = WarLibrary.dealCardsToPlayer(cardDeckNum);
         cpuDeck = WarLibrary.dealCardsToCPU(cardDeckNum);
+
         int playerScore = 26;
         int cpuScore = 26;
-        /*for (int i = 0; i < 26; i++){
+        for (int i = 0; i < 26; i++){
             System.out.println("player1 card " + playerDeck[i]);
-            System.out.println("cpu card " + cpuDeck[i] + "\n");
+            System.out.println("cpu card " + cpuDeck[i] + "");
+            System.out.println("STRING player " + playerDeckString[i]);
+            System.out.println("STRING cpu " + cpuDeckString[i]+ "\n");
             
-        }*/
+        }
         while (playerScore < 52 && cpuScore < 52 ){
             totalCount++;
+
             
             System.out.println("\nNEWLOOP");
             
@@ -87,7 +114,7 @@ public class HA{
             System.out.println("player1 score " + playerScore);
             System.out.println("cpu score " + cpuScore);
             if (playerDeck[0] > cpuDeck[0]){
-                changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore);
+                changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore, playerDeckString, cpuDeckString);
                 System.out.println("p1 card win");
                 playerScore++;
                 cpuScore--;
@@ -95,7 +122,7 @@ public class HA{
 
             }
             if (cpuDeck[0] > playerDeck[0]){
-                changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore);
+                changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore, cpuDeckString, playerDeckString);
                 System.out.println("CPU card win");
                 cpuScore++;
                 playerScore--;
@@ -103,18 +130,18 @@ public class HA{
             }
             else{
                 int randInt = (int) (Math.random() * 10) + 1;
-                if (randInt > 5){
-                    changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore);
+                if (randInt > 5){ // player wins tie
+                    changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore, playerDeckString, cpuDeckString);
                     System.out.println("tie P1 wins");
                     playerScore++;
                     cpuScore--;
                     continue;
                 }
-                else{
-                    changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore);
+                else{ // cpu wins tie
+                    changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore, cpuDeckString, playerDeckString);
                     System.out.println("tie CPU wins");
-                    playerScore--;
                     cpuScore++;
+                    playerScore--;
                     continue;
 
                 }
@@ -127,7 +154,7 @@ public class HA{
         }
         if (cpuScore > playerScore){
             System.out.println("cpu wins with " + cpuScore + " score player has " + playerScore);
-            System.out.println(WarLibrary.printWinner(cpuScore, playerScore, totalCount));
+            System.out.println(WarLibrary.printWinner(playerScore, cpuScore, totalCount));
         }
 
     }
