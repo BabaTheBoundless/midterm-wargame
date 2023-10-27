@@ -47,6 +47,15 @@ public class HA{
     }
     
     public static void main(String[] args){
+        StdDraw.setXscale(0, 10);
+        StdDraw.setYscale(0, 10);
+        StdDraw.setPenRadius(.1);
+
+        StdDraw.enableDoubleBuffering();
+        StdDraw.point(5, 5);
+        StdDraw.show();
+
+
         String[] suits = { "hearts", "spades", "diamonds", "clubs" };
         String[] cardValues = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14" };
         String[] deck = instanceOfCard(suits, cardValues);
@@ -120,9 +129,6 @@ public class HA{
             System.out.println("cpu wins with " + cpuScore + " score player has " + playerScore);
             System.out.println(WarLibrary.printWinner(cpuScore, playerScore, totalCount));
         }
-
-        
-
 
     }
 }
