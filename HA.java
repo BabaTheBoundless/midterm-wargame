@@ -1,4 +1,5 @@
 import java.util.Random;
+//can get rid of StdDraw.show() to see outcome very fast
 
 public class HA{
 
@@ -23,7 +24,7 @@ public class HA{
         winnerString[winCount] = loserStringOne;
     }
 
-    public static String[] cardStringPlayer(String[] randomDeck){
+    public static String[] cardStringPlayer(String[] randomDeck){ //gets a deck in string form
         String[] playerDeckString = new String[52];
         for (int i = 0; i < 26; i++){
             playerDeckString[i] = randomDeck[i];
@@ -94,34 +95,18 @@ public class HA{
 
         int playerScore = 26;
         int cpuScore = 26;
-        for (int i = 0; i < 26; i++){
-            System.out.println("player1 card " + playerDeck[i]);
-            System.out.println("cpu card " + cpuDeck[i] + "");
-            System.out.println("STRING player " + playerDeckString[i]);
-            System.out.println("STRING cpu " + cpuDeckString[i]+ "\n");
-            
-        }
+
         while (playerScore < 52 && cpuScore < 52 ){
             StdDraw.show();
-            StdDraw.pause(1000);
+            StdDraw.pause(700);
+    
             StdDraw.clear();
             totalCount++;
             String cpuDrawCard = WarLibrary.getDrawSuit(cpuDeckString[0]);
             String playerDrawCard = WarLibrary.getDrawSuit(playerDeckString[0]);
     
-
-
-
             StdDraw.picture(.25, .7, "assets/" + playerDrawCard + ".png", cardWidth, cardHeight);
             StdDraw.picture(.75, .7, "assets/" + cpuDrawCard + ".png", cardWidth, cardHeight);
-
-            
-            System.out.println("\nNEWLOOP");
-            
-            System.out.println("player " + playerDeck[0]);
-            System.out.println("cpu " + cpuDeck[0]);
-            System.out.println("player1 score " + playerScore);
-            System.out.println("cpu score " + cpuScore);
             if (playerDeck[0] > cpuDeck[0]){
                 changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore, playerDeckString, cpuDeckString);
                 WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore);
@@ -152,20 +137,20 @@ public class HA{
                     cpuScore++;
                     playerScore--;
                     continue;
-
                 }
-
-            }
-               
+            }    
         }
+        StdDraw.clear();
         if (playerScore > cpuScore){
-            System.out.println("player wins with " + playerScore + " cpu has + " + cpuScore);
             System.out.println(WarLibrary.printWinner(playerScore, cpuScore, totalCount));
+            StdDraw.text(.5, .5, "Player wins in " + totalCount + " turns!");
+            
         }
         if (cpuScore > playerScore){
-            System.out.println("cpu wins with " + cpuScore + " score player has " + playerScore);
             System.out.println(WarLibrary.printWinner(playerScore, cpuScore, totalCount));
+            StdDraw.text(.5, .5, "CPU wins in " + totalCount + " turns!");
         }
+        StdDraw.show();
 
     }
 }

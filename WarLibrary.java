@@ -46,7 +46,7 @@ public class WarLibrary {
 
 
     }
-    public static String getDrawSuit(String stringWithNumbers){
+    public static String getDrawSuit(String stringWithNumbers){ //will get suit of number and change name to be same as card graphics for display
         if (!stringWithNumbers.substring(1, 2).equals(" ") ){
             String number = stringWithNumbers.substring(0, 2);
             if (number.equals("11")) stringWithNumbers = "jack" + stringWithNumbers.substring(2);
@@ -58,11 +58,11 @@ public class WarLibrary {
         return playerStringDraw;
 
     }
-    public static void printWinnerText(String winnerText, int playerScore, int cpuScore){
+    public static void printWinnerText(String winnerText, int playerScore, int cpuScore){ //prints the round winner 
         StdDraw.text(.25, .25, "Player Cards: " + playerScore);
         StdDraw.text(.75, .25, "CPU Cards: " + cpuScore);
         StdDraw.text(.5, .15, winnerText);
-        StdDraw.pause(1000);
+        StdDraw.pause(600);
     }
 }
 
