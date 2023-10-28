@@ -62,7 +62,7 @@ public class WarLibrary {
         StdDraw.text(.25, .25, "Player Cards: " + playerScore);
         StdDraw.text(.75, .25, "CPU Cards: " + cpuScore);
         StdDraw.text(.5, .15, winnerText);
-        StdDraw.pause((int) ((pause * 1000) / 2));
+        StdDraw.pause((int) (pause * 1000));
     }
 }
 

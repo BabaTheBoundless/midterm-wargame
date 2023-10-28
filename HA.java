@@ -1,5 +1,5 @@
 import java.util.Random;
-//can get rid of StdDraw.show() to see outcome very fast
+//can increase StdDraw to make program go by faster
 
 public class HA{
 
@@ -96,11 +96,11 @@ public class HA{
 
         int playerScore = 26;
         int cpuScore = 26;
-        String lastRoundWin = new String("");
+        String lastRoundWin = new String("Nobody");
 
         while (playerScore < 52 && cpuScore < 52 ){
             StdDraw.show();
-            StdDraw.pause((int) ((pause * 1000) / 2 ));
+           
     
             StdDraw.clear();
             totalCount++;
@@ -114,8 +114,8 @@ public class HA{
                 WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore, pause);
                 playerScore++;
                 cpuScore--;
+                StdDraw.text(.5, .35, lastRoundWin + " won the last round");
                 lastRoundWin = "Player";
-                StdDraw.text(.5, .35, "Player won the last round");
                 continue;
 
             }
@@ -124,7 +124,8 @@ public class HA{
                 WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore, pause);
                 cpuScore++;
                 playerScore--;
-                StdDraw.text(.5, .35, "CPU won the last round");
+                StdDraw.text(.5, .35, lastRoundWin + " won the last round");
+                lastRoundWin = "CPU";
                 continue;
             }
             else{
@@ -134,7 +135,8 @@ public class HA{
                     WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore, pause);
                     playerScore++;
                     cpuScore--;
-                    StdDraw.text(.5, .35, "Player won the last round");
+                    StdDraw.text(.5, .35, lastRoundWin + " won the last round");
+                    lastRoundWin = "Player";
                     continue;
                 }
                 else{ // cpu wins tie
@@ -142,7 +144,8 @@ public class HA{
                     WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore, pause);
                     cpuScore++;
                     playerScore--;
-                    StdDraw.text(.5, .35, "CPU won the last round");
+                    StdDraw.text(.5, .35, lastRoundWin + " won the last round");
+                    lastRoundWin = "CPU";
                     continue;
                 }
             }    
