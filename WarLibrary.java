@@ -58,11 +58,11 @@ public class WarLibrary {
         return playerStringDraw;
 
     }
-    public static void printWinnerText(String winnerText, int playerScore, int cpuScore){ //prints the round winner 
+    public static void printWinnerText(String winnerText, int playerScore, int cpuScore, double pause){ //prints the round winner 
         StdDraw.text(.25, .25, "Player Cards: " + playerScore);
         StdDraw.text(.75, .25, "CPU Cards: " + cpuScore);
         StdDraw.text(.5, .15, winnerText);
-        StdDraw.pause(600);
+        StdDraw.pause((int) ((pause * 1000) / 2));
     }
 }
 

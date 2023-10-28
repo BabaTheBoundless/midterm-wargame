@@ -66,6 +66,7 @@ public class HA{
     }
     
     public static void main(String[] args){
+        double pause = Double.parseDouble(args[0]);
         StdDraw.setPenRadius(.1);
         StdDraw.enableDoubleBuffering();
         double cardWidth = .35;
@@ -95,10 +96,11 @@ public class HA{
 
         int playerScore = 26;
         int cpuScore = 26;
+        String lastRoundWin = new String("");
 
         while (playerScore < 52 && cpuScore < 52 ){
             StdDraw.show();
-            StdDraw.pause(700);
+            StdDraw.pause((int) ((pause * 1000) / 2 ));
     
             StdDraw.clear();
             totalCount++;
@@ -109,33 +111,38 @@ public class HA{
             StdDraw.picture(.75, .7, "assets/" + cpuDrawCard + ".png", cardWidth, cardHeight);
             if (playerDeck[0] > cpuDeck[0]){
                 changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore, playerDeckString, cpuDeckString);
-                WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore);
+                WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore, pause);
                 playerScore++;
                 cpuScore--;
+                lastRoundWin = "Player";
+                StdDraw.text(.5, .35, "Player won the last round");
                 continue;
 
             }
             if (cpuDeck[0] > playerDeck[0]){
                 changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore, cpuDeckString, playerDeckString);
-                WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore);
+                WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore, pause);
                 cpuScore++;
                 playerScore--;
+                StdDraw.text(.5, .35, "CPU won the last round");
                 continue;
             }
             else{
                 int randInt = (int) (Math.random() * 10) + 1;
                 if (randInt >= 5){ // player wins tie
                     changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore, playerDeckString, cpuDeckString);
-                    WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore);
+                    WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore, pause);
                     playerScore++;
                     cpuScore--;
+                    StdDraw.text(.5, .35, "Player won the last round");
                     continue;
                 }
                 else{ // cpu wins tie
                     changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore, cpuDeckString, playerDeckString);
-                    WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore);
+                    WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore, pause);
                     cpuScore++;
                     playerScore--;
+                    StdDraw.text(.5, .35, "CPU won the last round");
                     continue;
                 }
             }    
