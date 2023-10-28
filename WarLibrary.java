@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.Random; 
 public class WarLibrary {
 
     public static int[] getCardValue(String[] cardDeck){ //gets card value from string
