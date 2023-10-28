@@ -46,6 +46,24 @@ public class WarLibrary {
 
 
     }
+    public static String getDrawSuit(String stringWithNumbers){
+        if (!stringWithNumbers.substring(1, 2).equals(" ") ){
+            String number = stringWithNumbers.substring(0, 2);
+            if (number.equals("11")) stringWithNumbers = "jack" + stringWithNumbers.substring(2);
+            else if  (number.equals("12")) stringWithNumbers = "queen" + stringWithNumbers.substring(2);
+            else if (number.equals("13")) stringWithNumbers =  "king" + stringWithNumbers.substring(2);
+            else if (number.equals("14")) stringWithNumbers = "ace" + stringWithNumbers.substring(2);
+        }
+        String playerStringDraw = stringWithNumbers.replaceAll("\\s", "_");
+        return playerStringDraw;
+
+    }
+    public static void printWinnerText(String winnerText, int playerScore, int cpuScore){
+        StdDraw.text(.25, .25, "Player Cards: " + playerScore);
+        StdDraw.text(.75, .25, "CPU Cards: " + cpuScore);
+        StdDraw.text(.5, .15, winnerText);
+        StdDraw.pause(1000);
+    }
 }
 
    

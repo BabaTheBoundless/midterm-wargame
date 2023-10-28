@@ -1,7 +1,5 @@
 import java.util.Random;
 
-
-
 public class HA{
 
     public static void changeAfterRound(int[] winner, int[] loser, int winCount, int loserCount, String[] winnerString, String[] loserString){ //adds and removes cards after round
@@ -23,9 +21,8 @@ public class HA{
         }
         winner[winCount] = loserOne;
         winnerString[winCount] = loserStringOne;
-
-
     }
+
     public static String[] cardStringPlayer(String[] randomDeck){
         String[] playerDeckString = new String[52];
         for (int i = 0; i < 26; i++){
@@ -68,13 +65,11 @@ public class HA{
     }
     
     public static void main(String[] args){
-        /*StdDraw.setXscale(0, 10);
-        StdDraw.setYscale(0, 10);
         StdDraw.setPenRadius(.1);
-
         StdDraw.enableDoubleBuffering();
-        StdDraw.point(5, 5);
-        StdDraw.show();*/
+        double cardWidth = .35;
+        double cardHeight = .5;
+
 
 
         String[] suits = { "hearts", "spades", "diamonds", "clubs" };
@@ -85,6 +80,8 @@ public class HA{
        /*/ for (int i = 0; i < playDeck.length; i++){
             System.out.println(playDeck[i]);
         }*/
+        String winnerText;
+
         int[] playerDeck = new int[playDeck.length];
         int[] cpuDeck = new int[playDeck.length];
         int[] cardDeckNum = WarLibrary.getCardValue(playDeck);
@@ -105,7 +102,18 @@ public class HA{
             
         }
         while (playerScore < 52 && cpuScore < 52 ){
+            StdDraw.show();
+            StdDraw.pause(1000);
+            StdDraw.clear();
             totalCount++;
+            String cpuDrawCard = WarLibrary.getDrawSuit(cpuDeckString[0]);
+            String playerDrawCard = WarLibrary.getDrawSuit(playerDeckString[0]);
+    
+
+
+
+            StdDraw.picture(.25, .7, "assets/" + playerDrawCard + ".png", cardWidth, cardHeight);
+            StdDraw.picture(.75, .7, "assets/" + cpuDrawCard + ".png", cardWidth, cardHeight);
 
             
             System.out.println("\nNEWLOOP");
@@ -116,7 +124,7 @@ public class HA{
             System.out.println("cpu score " + cpuScore);
             if (playerDeck[0] > cpuDeck[0]){
                 changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore, playerDeckString, cpuDeckString);
-                System.out.println("p1 card win");
+                WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore);
                 playerScore++;
                 cpuScore--;
                 continue;
@@ -124,30 +132,31 @@ public class HA{
             }
             if (cpuDeck[0] > playerDeck[0]){
                 changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore, cpuDeckString, playerDeckString);
-                System.out.println("CPU card win");
+                WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore);
                 cpuScore++;
                 playerScore--;
                 continue;
             }
             else{
                 int randInt = (int) (Math.random() * 10) + 1;
-                if (randInt > 5){ // player wins tie
+                if (randInt >= 5){ // player wins tie
                     changeAfterRound(playerDeck, cpuDeck, playerScore, cpuScore, playerDeckString, cpuDeckString);
-                    System.out.println("tie P1 wins");
+                    WarLibrary.printWinnerText("Player wins!", playerScore, cpuScore);
                     playerScore++;
                     cpuScore--;
                     continue;
                 }
                 else{ // cpu wins tie
                     changeAfterRound(cpuDeck, playerDeck, cpuScore, playerScore, cpuDeckString, playerDeckString);
-                    System.out.println("tie CPU wins");
+                    WarLibrary.printWinnerText("CPU wins!", playerScore, cpuScore);
                     cpuScore++;
                     playerScore--;
                     continue;
 
                 }
 
-            }    
+            }
+               
         }
         if (playerScore > cpuScore){
             System.out.println("player wins with " + playerScore + " cpu has + " + cpuScore);
